@@ -1,0 +1,9 @@
+# Local server
+server:
+  # port is used by spring-boot-admin
+  port: 8083
+  contextPath: /siteVente
+spring:
+    datasource:
+      password: francovis
+      url: jdbc:mysql://localhost:3306/sitevente?user=francovis
