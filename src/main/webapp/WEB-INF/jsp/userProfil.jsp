@@ -1,30 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="include/importTags.jsp"%>
 <html>
-<head>
-    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-</head>
-<body>
-<h1><spring:message code="profil"/></h1>
-<form:form class="registration"
-           method="POST"
-           action="/siteVente/userInscription/sendUpDate"
-           modelAttribute="upDateProfil"
->
-    <form:label path="name"><spring:message code="id"/></form:label>
-    <br>
-    <form:input path="name" value="${name}"/>
-    <br>
-    <form:label path="password"><spring:message code="old"/><spring:message code="password"/></form:label>
-    <br>
-    <input type="password"/>
-    <br>
-    <form:label path="password"><spring:message code="new"/><spring:message code="password"/></form:label>
-    <br>
-    <form:input type="password" path="password"/>
-    <br>
-    <form:button><spring:message code="saveProfil"/></form:button>
-</form:form>
-<div class="vide"></div>
-</body>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <c:set var="user" value="${user}" scope="page"/>
+        <h1><spring:message code="profil"/></h1>
+        <form:form class="registration"
+                   method="POST"
+                   action="/siteVente/profil/sendUpDate"
+                   modelAttribute="upDateProfil"
+        >
+            <form:label path="name"><spring:message code="id"/></form:label>
+            <br>
+            <form:input path="name" disabled="true" value="${user.name}"/>
+            <br>
+            <form:label path="firstName"><spring:message code="firstName"/>*</form:label>
+            <br>
+            <form:input path="firstName" value="${user.firstName}"/>
+            <br>
+            <form:label path="firstName"><spring:message code="lastName"/>*</form:label>
+            <br>
+            <form:input path="lastName" value="${user.lastName}"/>
+            <br>
+            <form:label path="firstName"><spring:message code="deliveryAddress"/>*</form:label>
+            <br>
+            <form:input path="deliveryAddress" value="${user.deliveryAddress}"/>
+            <br>
+            <form:label path="firstName"><spring:message code="billingAddress"/></form:label>
+            <br>
+            <form:input path="billingAddress" value="${user.billingAddress}"/>
+            <br>
+            <form:label path="firstName">eMail*</form:label>
+            <br>
+            <form:input path="mail" value="${user.mail}"/>
+            <br>
+            <form:label path="firstName"><spring:message code="phoneNumber"/></form:label>
+            <br>
+            <form:input path="phoneNumber" value="${user.phoneNumber}"/>
+            <br>
+            <form:label path="locality"><spring:message code="Locality"/></form:label>
+            <br>
+            <form:select path="localityString">
+                <form:option value="${user.locality.toString}"/>
+                <form:options items="${localities}" itemValue="locality" itemLabel="toString"/>
+            </form:select>
+            <br>
+            <form:label path="password"><spring:message code="new"/><spring:message code="password"/></form:label>
+            <br>
+            <form:input type="password" path="password"/>
+            <br>
+            <form:button><spring:message code="saveProfil"/></form:button>
+        </form:form>
+        <div class="vide"></div>
+    </body>
 </html>

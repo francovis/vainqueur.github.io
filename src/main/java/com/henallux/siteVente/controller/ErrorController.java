@@ -21,8 +21,7 @@ public class ErrorController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String home (Model model,@ModelAttribute(value=Constants.LOG)SessionService sessionService){
-        model.addAttribute("title","IshIsh");
-        model.addAttribute("firstMenu", sessionService.getMenu());
+        model = HomeController.menu(model,sessionService);
         return "integrated:error";
     }
 }

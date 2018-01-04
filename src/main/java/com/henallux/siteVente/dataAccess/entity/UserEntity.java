@@ -16,11 +16,13 @@ public class UserEntity{
     @Column(name="usermail")
     private String mail;
     @Column(name="userphonenumber")
-    private Integer phoneNumber;
+    private String phoneNumber;
     @Column(name = "userdeliveryaddress")
     private String deliveryAddress;
     @Column(name = "userbillingaddress")
     private String billingAddress;
+    @Column(name = "isrefundable")
+    private Boolean isRefundable;
     @JoinColumn(name="userlocality", referencedColumnName = "localityname")
     @ManyToOne
     private LocalityEntity locality;
@@ -45,7 +47,7 @@ public class UserEntity{
         return firstName;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -61,7 +63,7 @@ public class UserEntity{
         return deliveryAddress;
     }
 
-    public String getmail() {
+    public String getMail() {
         return mail;
     }
 
@@ -89,11 +91,19 @@ public class UserEntity{
         this.lastName = lastName;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     public void setLocality(LocalityEntity locality) {
         this.locality = locality;
+    }
+
+    public void setRefundable(Boolean refundable) {
+        isRefundable = refundable;
+    }
+
+    public Boolean getRefundable() {
+        return isRefundable;
     }
 }

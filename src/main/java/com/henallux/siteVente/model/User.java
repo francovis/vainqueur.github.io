@@ -3,6 +3,7 @@ package com.henallux.siteVente.model;
 import com.henallux.siteVente.service.ConverterProjet;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 public class User {
@@ -23,11 +24,12 @@ public class User {
     private String mail;
     @NotNull
     private Locality locality;
+    private Boolean isRefundable;
     @NotNull
     @Size(min=2,max=50)
     private String deliveryAddress;
     private String billingAddress;
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     public User(){};
     public String getPassword() {
@@ -40,14 +42,10 @@ public class User {
                 this.password = password;
             }
     public void setName(String userName) {
-                this.name = userName;
-            }
-
-    public void setLocality(String locality) {
-        this.locality = ConverterProjet.stringLoc(locality);
+        this.name = userName;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -87,7 +85,7 @@ public class User {
         return billingAddress;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -97,5 +95,26 @@ public class User {
 
     public Locality getLocality() {
         return locality;
+    }
+
+    public Boolean getRefundable() {
+        return isRefundable;
+    }
+
+    public void setRefundable(Boolean refundable) {
+        isRefundable = refundable;
+    }
+
+    public void setLocalityString(String locality) {
+        this.locality = ConverterProjet.stringLoc(locality);
+        //this.locality = locality;
+    }
+
+    public void setLocality(Locality locality) {
+        this.locality = locality;
+    }
+
+    public String getLocalityString() {
+        return null;
     }
 }

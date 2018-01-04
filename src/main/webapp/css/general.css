@@ -15,7 +15,7 @@ body{
     margin:0px;
     background-attachment: fixed;
 }
-h1{
+h1,.buttonCategory,.buttonCategory button{
     padding:4px;
     width:300px;
 }
@@ -27,16 +27,10 @@ h1{
     padding:2px;
     width:350px;
 }
-input.noRadio{
+input.noRadio, #formAchat p button{
     float:right;
 }
-/*img{
-    transition-duration: 2s;
-}
-img:hover{
-    transform:scale(1.05);
-    transition-duration: 2s;
-}*/
+
 #p{
     font-size:200%;
     width: 300px;
@@ -60,14 +54,14 @@ footer{
     float:right;
 }
 .divRight,.divLeft{
-    height: 300px;
+    height: auto;
     width:200px;
     margin:20px;
     font-size: 200%;
     padding:15px;
 }
 .vide{
-    height: 700px;
+    height: 300px;
 }
 h1,form,.divLeft,.divRight,footer{
     opacity: 0.65;
@@ -77,10 +71,10 @@ h1,form,.divLeft,.divRight,footer{
     opacity: 1;
     display: inline;
 }
-h1,form,.divLeft,.divRight,.centre,#p,header p{
+h1,form,.divLeft,.divRight,.centre,#p,header p, .buttonCategory button{
     border:2px solid white;
 }
-h1,form,.divLeft,.divRight,#p,input,button{
+h1,form,.divLeft,.divRight,#p,input,button,.product p,.panier{
     font-family: staticF;
 }
 header,footer,input.underHeaderP{
@@ -165,7 +159,7 @@ input.underHeaderNoP{
 #flag img{
     margin-top:4px
 }
-#underHeader,header,footer,h1,form,.divLeft,.divRight,.centre,#p,#flag,header p,#underHeader button, input.underHeaderP{
+#underHeader,#formAchat p,.panier,.buttonCategory button,.product,header,footer,h1,form,.divLeft,.divRight,.centre,#p,#flag,header p,#underHeader button, input.underHeaderP{
     background-color: darkslategrey;
 }
 button{
@@ -192,4 +186,52 @@ body,a,#underHeader input{
 }
 #loupe{
     z-index: 1;
+}
+.product{
+    border: solid 2px white;;
+    width: 10%;
+    height: 20%;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.product img{
+    margin:5px;
+    border: solid 1px black;
+    width: 50%;
+    height: 50%;
+    cursor:pointer;
+}
+.product button{
+    width: 100%;
+    height: 100%;
+}
+.buttonCategory{
+    width: 95%;
+    text-align: center;
+    margin-top:100px;
+    border: 0px;
+    background-color: transparent;
+    opacity: 1;
+}
+.buttonCategory button{
+    color:white;
+    font-size: 200%;
+}
+.panier{
+    border-collapse:collapse;
+}
+.panier td, #formAchat p{
+    padding:5px;
+    border: solid 2px white;
+}
+#formAchat{
+    background:transparent;
+    border:0px;
+    opacity:1;
+}
+#formAchat p{
+    width:30%;
+}
+.floatLeft{
+    width:18%;
 }

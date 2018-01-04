@@ -9,16 +9,16 @@ public class OrderDetailsEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "orderdetailsid")
     private Integer id;
-    @Column(name = "orderdetailsquantity")
+    @Column(name = "quantity")
     private Integer quantity;
-    @Column(name = "orderdetailsrealprice")
-    private Double price;
-    @JoinColumn(name="orderdetailsparent", referencedColumnName = "orderid")
+    @Column(name = "unitprice")
+    private Double realPrice;
+    @JoinColumn(name="idorder", referencedColumnName = "orderid")
     @ManyToOne
     private OrderEntity order;
-    @JoinColumn(name="orderdetailsproduct", referencedColumnName = "productid")
+    @JoinColumn(name="idproduct", referencedColumnName = "productid")
     @ManyToOne
-    private ProductEntity user;
+    private ProductEntity product;
 
     public void setId(Integer id) {
         this.id = id;
@@ -28,16 +28,16 @@ public class OrderDetailsEntity {
         return id;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setRealPrice(Double realPrice) {
+        this.realPrice = realPrice;
     }
 
-    public void setUser(ProductEntity user) {
-        this.user = user;
+    public void setProduct(ProductEntity product) {
+        this.product= product;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getRealPrice() {
+        return realPrice;
     }
 
     public Integer getQuantity() {
@@ -48,8 +48,8 @@ public class OrderDetailsEntity {
         return order;
     }
 
-    public ProductEntity getUser() {
-        return user;
+    public ProductEntity getProduct() {
+        return product;
     }
 
     public void setOrder(OrderEntity order) {

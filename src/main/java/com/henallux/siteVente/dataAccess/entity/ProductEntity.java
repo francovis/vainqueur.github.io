@@ -9,8 +9,10 @@ public class ProductEntity {
     @Column(name = "productid")
     private Integer id;
     @Column(name = "productprice")
-    private Integer price;
-    @JoinColumn(name="productcategory", referencedColumnName = "categoryid")
+    private Double price;
+    @Column(name="productimage")
+    private String image;
+    @JoinColumn(name="idcategory", referencedColumnName = "categoryid")
     @ManyToOne
     private CategoryEntity category;
 
@@ -26,7 +28,7 @@ public class ProductEntity {
         return category;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -34,7 +36,15 @@ public class ProductEntity {
         this.category = category;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
     }
 }

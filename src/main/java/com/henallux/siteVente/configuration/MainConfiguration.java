@@ -36,7 +36,7 @@ public class MainConfiguration extends WebMvcConfigurerAdapter{
     public LocaleResolver localeResolver(){
         CookieLocaleResolver resolver = new CookieLocaleResolver();
         resolver.setDefaultLocale(new Locale("fr"));
-        resolver.setCookieName("myLocaleCookie");
+        resolver.setCookieName("language");
         resolver.setCookieMaxAge(-1);
         return resolver;
     }

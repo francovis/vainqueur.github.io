@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProviderConverter {
     private Mapper mapper = new DozerBeanMapper();
-
     public UserEntity userModelToUserEntity(User user){
         return mapper.map(user,UserEntity.class);
     }
@@ -64,11 +63,28 @@ public class ProviderConverter {
     public OrderDetails orderDetailsEntityToOrderDetailsModel(OrderDetailsEntity orderDetailsEntity){
         return mapper.map(orderDetailsEntity,OrderDetails.class);
     }
-    public TranslationEntity translationDetailsModelToTranslationEntity(Translation translation){
-        return mapper.map(translation,TranslationEntity.class);
+
+    public TranslationProductEntity translationProductModelToTranslationProductEntity(TranslationProduct translationProduct){
+        return mapper.map(translationProduct,TranslationProductEntity.class);
     }
 
-    public Translation translationEntityToTranslationModel(TranslationEntity translationEntity){
-        return mapper.map(translationEntity,Translation.class);
+    public TranslationProduct translationProductEntityToTranslationProductModel(TranslationProductEntity translationProductEntity){
+        return mapper.map(translationProductEntity,TranslationProduct.class);
+    }
+
+    public TranslationCategory translationCategoryEntityToTranslationCategoryModel(TranslationCategoryEntity translationProductEntity){
+        return mapper.map(translationProductEntity,TranslationCategory.class);
+    }
+
+    public TranslationCategoryEntity translationCategoryModelToTranslationCategoryEntity(TranslationCategory translationCategory){
+        return mapper.map(translationCategory,TranslationCategoryEntity.class);
+    }
+
+    public void setMapper(Mapper mapper) {
+        this.mapper = mapper;
+    }
+
+    public Mapper getMapper() {
+        return mapper;
     }
 }

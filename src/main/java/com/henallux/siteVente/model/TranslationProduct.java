@@ -2,7 +2,7 @@ package com.henallux.siteVente.model;
 
 import javax.validation.constraints.NotNull;
 
-public class Translation {
+public class TranslationProduct {
     @NotNull
     private Integer id;
     @NotNull
@@ -13,7 +13,7 @@ public class Translation {
     private Product product;
     @NotNull
     private Language language;
-    public Translation(){}
+    public TranslationProduct(){}
 
     public void setLanguage(Language language) {
         this.language = language;

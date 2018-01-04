@@ -12,7 +12,16 @@
     <spring:url var="localeEn" value="">
         <spring:param name="locale" value="en"/>
     </spring:url>
-    <spring:message code="${firstMenu}" var="menu2"/>
+    <c:choose>
+        <c:when test="${connection}">
+            <spring:message code="disconnection" var="menu1"/>
+            <spring:message code="profil" var="menu2"/>
+        </c:when>
+        <c:otherwise>
+            <spring:message code="connection" var="menu1"/>
+            <spring:message code="menu2" var="menu2"/>
+        </c:otherwise>
+    </c:choose>
     <spring:message code="menu3" var="menu3" />
     <spring:message code="menu4" var="menu4" />
     <spring:message code="menu5" var="menu5" />
@@ -26,12 +35,12 @@
     <form class="menu"
         method="POST"
         action="/siteVente/menu">
+        <input class="underHeaderP" type="submit" name="actionMenu" value="${menu1}"/>
         <input class="underHeaderP" type="submit" name="actionMenu" value="${menu2}"/>
         <input class="underHeaderP" type="submit" name="actionMenu" value="${menu3}"/>
         <input class="underHeaderP" type="submit" name="actionMenu" value="${menu4}"/>
         <input class="underHeaderP" type="submit" name="actionMenu" value="${menu5}"/>
     </form>
-    <button id="loupe"><img src='<spring:url value="/images/loupe.png"/>'/></button>
 </div>
 <p id="flag">
     <a href="${localeFr}"><img src='<spring:url value="/images/frFlag.png"/>'/></a>
@@ -43,7 +52,7 @@
     <link type="text/css" href="<spring:url value='/css/general.css'/>" rel="Stylesheet">
     <script src="<spring:url value='/javaScript/cssTransformation.js'/>"></script>
 </div>
-<footer>
+<footer style="margin-top: 300px">
     <spring:message code="footer"/>
 </footer>
 </body>

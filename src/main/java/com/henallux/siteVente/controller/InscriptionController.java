@@ -20,7 +20,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value="/userInscription")
-@SessionAttributes({Constants.CURRENT_USER})
+@SessionAttributes({Constants.CURRENT_USER,Constants.LOG})
 public class InscriptionController {
     private UserDAO userDAO;
     private LocalityDAO localityDAO;
@@ -36,10 +36,14 @@ public class InscriptionController {
         return new User();
     }
 
+    @ModelAttribute(Constants.LOG)
+    public SessionService sessionService(){
+        return new SessionService();
+    }
+
     @RequestMapping (method = RequestMethod.GET)
-    public String home (Model model){
-        model.addAttribute("title","IshIsh");
-        model.addAttribute("firstMenu", "menu2");
+    public String home (Model model,@ModelAttribute(value = Constants.LOG) SessionService sessionService){
+        model = HomeController.menu(model,sessionService);
         model.addAttribute("profilInscription", new User());
         model.addAttribute("localities",localityDAO.getAllLocality());
         return "integrated:inscription";
@@ -48,13 +52,15 @@ public class InscriptionController {
     @RequestMapping (value="/sendInscription",method = RequestMethod.POST)
     public String getFormData (@ModelAttribute(value=Constants.CURRENT_USER) @Valid User user, final BindingResult errors){
         if(errors.hasErrors()){
-            System.out.println(errors.toString());
-            return "redirect:/baderror";
+            System.out.println(errors.getClass());
+            System.out.println(String.class);
+            System.out.println("aa".getClass());
+            System.out.println("aa".getClass().equals(String.class));
+            return "redirect:/userInscription";
         }
-        else{
-            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-            userDAO.save(user);
-            return "redirect:/";
-        }
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setRefundable(false);
+        userDAO.save(user);
+        return "redirect:/";
     }
 }

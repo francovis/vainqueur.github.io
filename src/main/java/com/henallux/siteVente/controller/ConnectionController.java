@@ -21,6 +21,7 @@ import javax.validation.Valid;
 public class ConnectionController {
 
     private UserDAO userDAO;
+    private static int nbConnection=0;
 
     @Autowired
     public ConnectionController(UserDAO userDAO){
@@ -38,18 +39,20 @@ public class ConnectionController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String home (Model model, @ModelAttribute(value=Constants.LOG)SessionService sessionService){
-        model.addAttribute("title","IshIsh");
-        model.addAttribute("firstMenu", sessionService.getMenu());
+        model = HomeController.menu(model,sessionService);
+        model.addAttribute("isWrongID",nbConnection==0);
         model.addAttribute("profilConnection", new User());
         return "integrated:connection";
     }
 
     @RequestMapping (value="/sendConnection",method = RequestMethod.POST)
-    public String getFormData (@ModelAttribute(value=Constants.LOG)SessionService sessionService,@ModelAttribute(value=Constants.CURRENT_USER)User user,final BindingResult errors){
+    public String getFormData (@ModelAttribute(value=Constants.LOG)SessionService sessionService,@ModelAttribute(value=Constants.CURRENT_USER)User user){
         if(userDAO.connectionValidation(user)){
             sessionService.setIsLogged(true);
+            nbConnection=0;
             return "redirect:/";
         }
+        nbConnection++;
         return "redirect:/userConnection";
     }
 }

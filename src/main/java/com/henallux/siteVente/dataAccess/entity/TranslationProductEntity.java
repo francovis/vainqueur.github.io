@@ -4,18 +4,18 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "TRANSLATIONPRODUCT")
-public class TranslationEntity {
+public class TranslationProductEntity {
     @Id
     @Column(name = "translateid")
-    private Integer ID;
-    @Column(name="translatename")
+    private Integer id;
+    @Column(name="productname")
     private String name;
-    @Column(name="translatedescription")
+    @Column(name="productdescription")
     private String description;
-    @JoinColumn(name="translateproduct", referencedColumnName = "productid")
+    @JoinColumn(name="idproduct", referencedColumnName = "productid")
     @ManyToOne
     private ProductEntity product;
-    @JoinColumn(name="translatelanguage", referencedColumnName = "languageid")
+    @JoinColumn(name="idlanguage", referencedColumnName = "languageid")
     @ManyToOne
     private LanguageEntity language;
 
@@ -32,7 +32,7 @@ public class TranslationEntity {
     }
 
     public Integer getID() {
-        return ID;
+        return id;
     }
 
     public LanguageEntity getLanguage() {
@@ -55,7 +55,7 @@ public class TranslationEntity {
         this.language = language;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setID(Integer id) {
+        this.id = id;
     }
 }

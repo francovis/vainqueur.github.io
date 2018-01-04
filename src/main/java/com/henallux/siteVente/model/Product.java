@@ -6,12 +6,14 @@ public class Product {
     @NotNull
     private Integer id;
     @NotNull
-    private Integer price;
+    private Double price;
     @NotNull
     private Category category;
+    @NotNull
+    private String image;
     public Product(){}
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -19,7 +21,7 @@ public class Product {
         this.category = category;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -33,5 +35,13 @@ public class Product {
 
     public Category getCategory() {
         return category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
