@@ -6,6 +6,16 @@
     </head>
     <body>
         <h1><spring:message code="menu2"/></h1>
+        <c:choose>
+            <c:when test="${!areCorrectsFields}">
+                <div class="error">
+                    <p style="font-size: 125%"><spring:message code="badFields"/></p>
+                    <c:forEach var="erreur" items="${erreurs}">
+                        <p>- <spring:message code="${erreur}"/></p>
+                    </c:forEach>
+                </div>
+            </c:when>
+        </c:choose>
         <form:form class="registration"
                    method="POST"
                    action="/siteVente/userInscription/sendInscription"

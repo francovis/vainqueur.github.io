@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Locale;
 
 @Controller
@@ -27,14 +28,13 @@ public class ProfilController{
     private UserDAO userDAO;
     private LocalityDAO localityDAO;
     private User userToSave;
-    private MessageSource messageSource;
+    private static ArrayList<String> erreurs;
 
     @Autowired
-    public ProfilController(UserDAO userDAO, LocalityDAO localityDAO,
-                            MessageSource messageSource){
+    public ProfilController(UserDAO userDAO, LocalityDAO localityDAO){
         this.userDAO=userDAO;
         this.localityDAO=localityDAO;
-        this.messageSource = messageSource;
+        if(erreurs==null)erreurs=new ArrayList<>();
     }
 
     @ModelAttribute(Constants.CURRENT_USER)
@@ -50,11 +50,16 @@ public class ProfilController{
     @RequestMapping(method = RequestMethod.GET)
     public String home (Model model, @ModelAttribute(Constants.CURRENT_USER)User user,
                         @ModelAttribute(value = Constants.LOG) SessionService sessionService){
-        userToSave=userDAO.getUser(user.getName());
-        model = HomeController.menu(model,sessionService);
-        model.addAttribute("user",userToSave);
-        model.addAttribute("localities",localityDAO.getAllLocality());
-        model.addAttribute("upDateProfil", new User());
+        model = commonGet(model,user,sessionService);
+        model.addAttribute("areCorrectsFields",true);
+        return "integrated:userProfil";
+    }
+
+    @RequestMapping(value="/badFields",method = RequestMethod.GET)
+    public String badFiedls (Model model, @ModelAttribute(Constants.CURRENT_USER)User user,
+                        @ModelAttribute(value = Constants.LOG) SessionService sessionService){
+        model = commonGet(model,user,sessionService);
+        model.addAttribute("areCorrectsFields",false);
         return "integrated:userProfil";
     }
 
@@ -70,12 +75,32 @@ public class ProfilController{
             if (user.getLocality() == null)
                 user.setLocality(userToSave.getLocality());
 
-            if (user.getFirstName() != null && user.getLastName() != null &&
-                    user.getDeliveryAddress() != null && user.getMail() != null) {
+            if (user.getFirstName().equals("") || user.getLastName().equals("") ||
+                    user.getDeliveryAddress().equals("") ||
+                    !user.getMail().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")) {
+                if(user.getFirstName().equals(""))erreurs.add("firstNameError");
+                if(user.getLastName().equals(""))erreurs.add("lastNameError");
+                if(user.getDeliveryAddress().equals(""))erreurs.add("deliveryAddressError");
+                if(!user.getMail().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"))
+                    erreurs.add("mailError");
+            }
+            else{
                 user.setRefundable(userToSave.getRefundable());
                 userDAO.save(user);
                 return "redirect:/";
             }
-        return "redirect:/profil";
+
+        return "redirect:/profil/badFields";
+    }
+
+    private Model commonGet(Model model, User user, SessionService sessionService){
+        userToSave=userDAO.getUser(user.getName());
+        model = HomeController.menu(model,sessionService);
+        model.addAttribute("user",userToSave);
+        model.addAttribute("upDateProfil", new User());
+        model.addAttribute("erreurs",erreurs);
+        model.addAttribute("localities",localityDAO.getAllLocality());
+        erreurs = new ArrayList<>();
+        return model;
     }
 }

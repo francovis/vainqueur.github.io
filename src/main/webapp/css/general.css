@@ -74,7 +74,7 @@ h1,form,.divLeft,.divRight,footer{
 h1,form,.divLeft,.divRight,.centre,#p,header p, .buttonCategory button{
     border:2px solid white;
 }
-h1,form,.divLeft,.divRight,#p,input,button,.product p,.panier{
+h1,form,.divLeft,.divRight,#p,input,button,.product p,.panier,.error{
     font-family: staticF;
 }
 header,footer,input.underHeaderP{
@@ -234,4 +234,12 @@ body,a,#underHeader input{
 }
 .floatLeft{
     width:18%;
+}
+.error{
+    width: 25%;
+    padding: 20px;
+    border: solid 2px red;
+    background: lightyellow;
+    color: red;
+    margin-bottom: 20px;
 }
